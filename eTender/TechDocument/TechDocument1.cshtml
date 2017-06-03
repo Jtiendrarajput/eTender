@@ -1,0 +1,201 @@
+﻿@model IEnumerable<C_App.Models.OnewayResult>
+
+@{
+    ViewBag.Title = "OneWayResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    function showpopup(id) {
+        $(".modal").hide();
+        $("#D"+id).show();
+    };
+    function clo_se()
+    {
+        $(".modal").hide();
+    };
+</script>
+<div class="header-bennar-area">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="header-bennar-left">
+                    <h2>Search Result</h2>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="header-bennar-right">
+                    <ul>
+                        <li><a href="#">Home</a> /</li>
+                        <li>Search Result</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-shop-area section-space" style="padding-bottom:40px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                        <div class="inner-shop-top-left">
+                            <p>You Searched for  : @Model.First().Cityfrom To @Model.First().CityTo </p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+                        <div class="inner-shop-top-right">
+                            <ul>
+                                <li><a href="@Url.Action("Index","Home")" ><i class="fa fa-reply-all" aria-hidden="true"></i> Modify Search</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row inner-section-space-top30">
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+
+                        <!-- Listed product show -->
+                        <div role="tabpanel" class="tab-pane active car-list listing-style3 car" id="list-view">
+
+                            @foreach (var item in Model)
+                            {
+                                <article class="box ">
+                                    <figure class="col-xs-12 col-md-3 title-car">
+                                        <h4 class="box-title">@item.Category <small>@item.othercars</small></h4>
+
+                                        <img src="@("../Upload/"+item.Img)" alt="cruise" width="189" height="120">
+
+                                    </figure>
+                                    <div class="details col-xs-12 col-md-9 clearfix">
+                                        <div class="col-sm-5">
+                                            <div class="clearfix ">
+                                                <h4 class="box-title hdn-mob">@item.Category<small>@item.othercars</small></h4>
+
+                                            </div>
+                                            <div class="amenities">
+                                                <ul>
+                                                    <li><i class="soap-icon-user circle"></i>@item.Seat</li>
+                                                    <li><i class="soap-icon-suitcase circle"></i>@item.NoofBag</li>
+                                                    <li><i class="soap-icon-aircon circle"></i>@(item.Ac == 1 ? "AC" : "No AC")</li>
+
+                                                    <li><i class="soap-icon-fmstereo circle"></i>YES</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-4 character">
+                                            <dl class="">
+                                                <dt class="skin-color">Pakage</dt>
+                                                <dd>@item.Cityfrom To @item.CityTo</dd>
+                                                <dt class="skin-color">Total Km</dt>
+                                                <dd>@item.ToKm  Km</dd>
+
+                                            </dl>
+                                        </div>
+                                        <div class="action col-xs-12 col-sm-3">
+                                            <span class="price">
+                                                <small>
+                                                    <a href="#" id="@("A" + item.SchemID)" onclick="showpopup(@item.SchemID)"><span> Fare Details</span></a>
+                                                </small><i class="fa fa-inr" aria-hidden="true"></i> @item.Price
+                                            </span>
+                                            @using (Html.BeginForm("Selectoneway", "Result", FormMethod.Post))
+                                            {
+                                                <input type="hidden" value="@item.SchemID" id="SID" name="SID" />
+                                                <input type="hidden" value="@item.requireddate" id="reqDate" name="reqDate" />
+                                                <input type="hidden" value="@item.Category" id="CarCategory" name="CarCategory" />
+                                                <input type="hidden" value="@(item.Cityfrom+" To "+item.CityTo)" id="CityName" name="CityName" />
+                                                <input type="hidden" value="@item.Price" id="Price" name="Price" />
+                                                <input type="hidden" value="@item.tax" id="Stax" name="Stax" />
+                                                <input type="hidden" value="@item.ToKm" id="Km" name="Km" />
+                                                
+                                                <input type="submit" class="button btn-small full-width" value="Book Now" />
+                                            }
+
+                                        </div>
+                                    </div>
+                                </article>
+    <div id="@("D" + item.SchemID)" class="modal fade in" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="clo_se()" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Fare Details-</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="newpnl" class="divmain">
+                        <div class="divfairheader">
+                            Fare Details-
+                        </div>
+                        <div class="hover_css">
+                            <div class="table-responsive">
+                                <table class="table ftbl">
+                                    <tr>
+                                        <th>Km </th>
+                                        <th>Bais Fare </th>
+
+                                        <th>Service Tax </th>
+                                        <th>Total Cost </th>
+                                    </tr>
+                                    <tr>
+                                        <td>@item.ToKm</td>
+                                        <td>@item.Price</td>
+
+                                        <td>Rs. @(item.Price * item.tax / 100)</td>
+                                        <td>Rs. @item.Totalprice</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+
+                                        <td>(@item.tax) </td>
+                                        <td></td>
+                                    </tr>
+
+                                </table>
+
+                                <div style="padding-left:10px;">
+                                    <p class="text">
+                                        <strong>Charges not included (would be charged as per actual) :</strong>
+                                    </p>
+                                    <ul class="text" style="margin-left:35px;">
+                                        <
+                                        <li>Toll tax (both side), state tax and parking charges as applicable</li>
+                                        
+                                        <li>Driver Night charges ( Rs. 250 per night) if driver on duty between 10PM to 5 AM</li>
+                                    </ul>
+                                </div>
+                                <p class="text" style="padding-left:10px;">
+                                    <strong>Notes:</strong>
+                                </p>
+                                <div style="padding-left:10px;">
+                                    <ul class="text" style="margin-left:35px;">
+                                        <li>Car will not be driven on unpaved roads</li>
+                                        <li>AC will be switched off in hilly areas</li>
+                                        <li>Local travel not allowed </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+                                
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

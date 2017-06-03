@@ -1,0 +1,223 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Admin|e-Procurement System </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="~/Resources/css/style.css">
+    <style>
+        .container {
+            width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+        }
+        input[type="button"], input[type="submit"] {
+                background: #4CAF50;
+    color: #fff;
+    cursor:pointer;
+    width:auto;
+    text-transform: uppercase;
+        }
+
+        footer {
+            width: 1140px;
+            margin: 2px auto;
+            background: #fff;
+        }
+
+        .sidebar {
+            width: 20%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            background-color: #f6f6f6;
+            box-shadow: 1px 2px 1px #ececec;
+            float: left;
+        }
+
+        .contentarea {
+            width: 75%;
+            border: 1px solid #ddd;
+            background-color: #f6f6f6;
+            box-shadow: 1px 2px 1px #ececec;
+            padding: 10px;
+            float: right;
+            margin-left: 2%;
+        }
+
+        .sidebar > ul > li > a {
+            border-radius: 3px;
+            color: #3C4858;
+            line-height: 25px;
+            text-decoration: none;
+        }
+
+        .sidebar > ul > li {
+            border-bottom: 1px solid gainsboro;
+        }
+
+        .logo {
+            float: left;
+        }
+
+        .hedaermenu {
+            float: right;
+        }
+
+            .hedaermenu td {
+                padding: 5px;
+                text-align: left;
+                font-size: 12px;
+            }
+
+        strong {
+            font-weight: bold;
+        }
+
+        td .fa {
+            font-size: 14px;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .content {
+            margin-top: 20px;
+            display: flex;
+            border-top: 1px solid #e9e9e9;
+            padding-top: 20px;
+        }
+
+        .title {
+            font-size: 16px;
+            width: 100%;
+            background: #ef4b50;
+            color: #fff;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .welcome {
+            font-size: 13px;
+        }
+
+        .welcome-text {
+            border-bottom: 1px solid #d0cccc;
+            padding-bottom: 10px;
+            font-size: 18px;
+        }
+
+        label {
+            margin-bottom: 7px;
+            display: block;
+                font-size: 90%;
+    font-weight: bold;
+        }
+
+        .form-control {
+            width: 48%;
+            float: left;
+            margin-left: 1%;
+        }
+
+        input, select {
+            outline: none;
+            display: block;
+            width: 100%;
+            border: 1px solid #d9d9d9;
+            margin: 0 0 12px;
+            padding: 10px 6px;
+            box-sizing: border-box;
+            font-wieght: 400;
+            -webkit-transition: 0.3s ease;
+            transition: 0.3s ease;
+        }
+
+        .program {
+            margin-top: 20px;
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            float: left;
+            width: auto;
+        }
+        .btn-primary {
+    background: #3fc2ed !important;
+    float: right;
+    padding: 15px 30px;
+    text-transform: uppercase;
+}
+    </style>
+</head>
+
+<body>
+   @{var UserDetails = (eTenderService.DataModel.tblUserProfile)ViewBag.user; }
+    <div class="container">
+        <!--header-->
+        <header>
+            <div class="logo"><img src="~/Resources/img/npp-logo.png" width="330" /></div>
+            <div class="hedaermenu">
+                <table width="100%" border="0">
+                    <tr>
+                        <td><strong>Welcome</strong> : </td>
+                        <td>@UserDetails.Email</td>
+                        <td><strong>Server Time</strong> :</td>
+                        <td>10:00</td>
+                        <td><a href="/Vendor/VDash"><i class="fa fa-home fa-2" aria-hidden="true"></i> Home</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Last Login</strong> :</td>
+                        <td>@(UserDetails.LastLoginDatenTime != null ? Convert.ToDateTime(UserDetails.LastLoginDatenTime).ToString("dd-MMM-yyyy hh:mm tt") : "")</td>
+                        <td><strong>IP Address</strong> :</td>
+                        <td>@UserDetails.LastLoginIP</td>
+                        <td><a href="@Url.Action("Logout","Login")"><i class="fa fa-sign-out fa-2" aria-hidden="true"></i> Logout</a></td>
+                    </tr>
+                </table>
+            </div>
+        </header>
+        <div class="clear"></div>
+        <!--content-->
+        <div class="content">
+            <!--sidemenu-->
+            <div class="sidebar">
+                <div class="title">User Menus</div>
+                <ul>
+                    <li><a href="/Admin/ADash"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Dashboard</a></li>
+                    
+                    <li><a href="/Admin/Category/Index"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Category Master</a></li>
+
+                    <li><a href="/Admin/Department/Index"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Department Master</a></li>
+
+                    <li><a href="/Admin/CreateTendor/Index"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Tendors </a></li>
+
+                    <li><a href="/Admin/CommiteeMember/Index"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Commitee Members </a></li>
+
+                    <li><a href="/Admin/CommiteeCreation/Index"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Create Commitee</a></li>
+
+                    <li><a href="/Admin/CommiteeUpdate/Index"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Update Commitee</a></li>
+                    
+                    <li><a href="/Admin/VendorActivation/Index"><i class="fa fa-angle-double-right" aria-hidden="true"></i> Vendor Approval</a></li>
+
+                </ul>
+            </div>
+            <!--contentarea-->
+            <div class="contentarea">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <footer>
+        <div class="cta">e-Procurement System. Developed by <a href="#">India Interactive</a></div>
+    </footer>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="~/Resources/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+D:\Jitendra\eTenderService\eTenderService\bin\Debug\eTenderService.dll.config
+D:\Jitendra\eTenderService\eTenderService\bin\Debug\eTenderService.dll
+D:\Jitendra\eTenderService\eTenderService\bin\Debug\eTenderService.pdb
+D:\Jitendra\eTenderService\eTenderService\bin\Debug\EntityFramework.dll
+D:\Jitendra\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.dll
+D:\Jitendra\eTenderService\eTenderService\bin\Debug\EntityFramework.xml
+D:\Jitendra\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.xml
+D:\Jitendra\eTenderService\eTenderService\obj\Debug\eTenderService.dll
+D:\Jitendra\eTenderService\eTenderService\obj\Debug\eTenderService.pdb
+D:\Jitendra\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.dll
+D:\Jitendra\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.pdb
+D:\Jitendra\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll.config
+D:\Jitendra\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll
+D:\Jitendra\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.pdb
+D:\Jitendra\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.dll
+D:\Jitendra\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.dll
+D:\Jitendra\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.xml
+D:\Jitendra\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll.config
+D:\Projects\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll
+D:\Projects\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.pdb
+D:\Projects\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.dll
+D:\Projects\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.xml
+D:\Projects\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.dll
+D:\Projects\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.pdb
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll.config
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.pdb
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.dll
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.xml
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.dll
+C:\Users\Administrator\Desktop\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.pdb
+D:\Projects\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.csprojResolveAssemblyReference.cache
+C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll.config
+C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll
+C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.pdb
+C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.dll
+C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.xml
+C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.xml
+C:\Dot Net Project\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.dll
+C:\Dot Net Project\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.pdb
+C:\Dot Net Project\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.csprojResolveAssemblyReference.cache

@@ -1,0 +1,505 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Vendor/Views/Shared/_layout.cshtml";
+}
+
+<script src="~/Areas/Vendor/AnglarModel/angular-min-1.4.8.js"></script>
+<script src="~/Areas/Vendor/AnglarModel/Profile.js"></script>
+
+<div ng-app="ProfileModel" ng-controller="ProfileController">
+
+    <div ng-show="ViewProfile">
+        <style>
+            .new_table {
+                width: 100%;
+            }
+
+            .table-responsive {
+                overflow-x: scroll;
+            }
+
+            .new_a {
+                cursor: pointer;
+            }
+
+            .label {
+                padding-top: 20px;
+                float: left;
+            }
+        </style>
+
+        <div>
+            <h2 class="new_h2"><strong>View Profile</strong></h2>
+        </div>
+        <div class="table-responsive">
+          
+            <table class="table new_table" >
+                <tr>
+                    <th>
+                        <h2 ><strong>Company Detail</strong></h2>
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Company Name</label>
+                        <p>{{VendorDetails.CompanyName}}</p>
+                    </td>
+                    <td>
+                        <label>Registration Number</label>
+                        <p>{{VendorDetails.RegistrationNo}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Registered Address</label>
+                        <p>{{VendorDetails.RegisteredAddress}}</p>
+                    </td>
+                    <td>
+                        <label>Name Of Partners / Director</label>
+                        <p>{{VendorDetails.NameOfPartners}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>City</label>
+                        <p>{{VendorDetails.City}}</p>
+                    </td>
+                    <td>
+                        <label>State</label>
+                        <p>{{VendorDetails.State}}</p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label>Postal Code</label>
+                        <p>{{VendorDetails.PostalCode}}</p>
+                    </td>
+                    <td>
+                        <label>Country</label>
+                        <p>{{VendorDetails.Country}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Establishment Year</label>
+                        <p>{{VendorDetails.EstablishmentYear}}</p>
+                    </td>
+                    <td>
+                        <label>Nature Of Business</label>
+                        <p>{{VendorDetails.NatureOfBusiness}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Legal Status</label>
+                        <p>{{VendorDetails.LegalStatus}}</p>
+                    </td>
+                    <td>
+                        <label>Company Category</label>
+                        <p>{{VendorDetails.CompanyCategory}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>PAN Number</label>
+                        <p>{{VendorDetails.PANNumber}}</p>
+                    </td>
+                    <td>
+                        <label>TIN Number</label>
+                        <p>{{VendorDetails.TINNumber}}</p>
+                    </td>
+                </tr>
+                </table>
+            <table class="table new_table">
+                <tr>
+                    <th>
+                        <h2><strong>Contact Details</strong></h2>
+                    </th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Contact Name</label>
+                        <p>{{VendorDetails.Title + " " + VendorDetails.ContactName}}</p>
+                    </td>
+                    <td>
+                        <label>Login Email</label>
+                        <p>
+                        {{VendorDetails.Email}} &nbsp;
+                            <a herf="javascript:void(0)" class="new_a" ng-click="MovetoLoginEmailVerification()" ng-show="!LoginEmailVerified">Verify your Email</a>
+                            <span ng-show="LoginEmailVerified" style="color: #3fc2ed;">Verified</span>
+                        
+                        </p>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <label>Contact Email</label>
+                        <p>
+                            {{VendorDetails.ContactEmail}} &nbsp;
+                            <a herf="javascript:void(0)" class="new_a" ng-click="MovetoEmailVerification()" ng-show="!EmailVerified">Verify your Email</a>
+                            <span ng-show="EmailVerified" style="color: #3fc2ed;">Verified</span>
+                        </p>
+                    </td>
+                    <td>
+                        <label>Designation</label>
+                        <p>{{VendorDetails.Designation}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Mobile Number</label>
+                        <p>{{VendorDetails.CountryCode + " " + VendorDetails.MobileNumber}}</p>
+                    </td>
+                    <td>
+                        <label>Phone Number</label>
+                        <p>{{VendorDetails.ISD_STDCode + " " + VendorDetails.PhoneNumber}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Date of Birth</label>
+                        <p>{{VendorDetails.DOB | date: dd-MMM-yyyy}}</p>
+
+                    </td>
+                    <td>
+                        <label>Bidder Pre Registered With</label>
+                        <p>{{VendorDetails.BidderPreRegisteredWith}}</p>
+                    </td>
+                 
+
+                </tr>
+                <tr ng-show="BidderPreReg">
+                    <td>
+                        <label>Udyog Aadhar Number</label>
+                        <p>{{VendorDetails.UdyogAadharNumber}}</p>
+                    </td>
+                    <td>
+                        <label>Organisation Type</label>
+                        <p>{{VendorDetails.OrganisationType}}</p>
+                    </td>
+                </tr>
+                <tr ng-show="BidderPreReg">
+
+                    <td>
+                        <label>Bidder Registered Type</label>
+                        <p>{{VendorDetails.BidderRegisteredType}}</p>
+                    </td>
+                    <td ng-show="catdisp">
+                        <label>Category</label>
+                        <p>{{VendorDetails.Category}}</p>
+                    </td>
+                </tr>
+            </table>
+
+            <input type="button" value="Edit Profile" ng-click="MovetoEdit();"/>
+        </div>
+    </div>
+
+    <div ng-show="EditProfileView" class="table-responsive">
+
+        <div>
+            <h2 class="new_h2"> <strong>Edit Details</strong> </h2>
+        </div>
+
+        <div>
+
+            <table class="table new_table">
+                <tr>
+                    <th class="new_th"><strong>Company Detail</strong></th>
+                    <th>&nbsp;</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Company Name</label>
+                        <input type="text" ng-model="VendorDetails.CompanyName" placeholder="Company Name *" required />
+                    </td>
+                    <td>
+                        <label>Registration Number</label>
+                        <input type="text" ng-model="VendorDetails.RegistrationNo" placeholder="Registration Number *" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Registered Address</label>
+                        <input type="text" ng-model="VendorDetails.RegisteredAddress" placeholder="Registered Address *" required />
+                    </td>
+                    <td>
+                        <label>Name Of Partners / Directors</label>
+                        <input type="text" ng-model="VendorDetails.NameOfPartners" placeholder="Name Of Partners / Directors *" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>City</label>
+                        <input type="text" ng-model="VendorDetails.City" placeholder="City *" required />
+                    </td>
+                    <td>
+                        <label>State</label>
+                        <input type="text" ng-model="VendorDetails.State" placeholder="State *" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Postal Code</label>
+                        <input type="number" ng-model="VendorDetails.PostalCode" placeholder="Postal Code *" required />
+                    </td>
+                    <td>
+                        <label>Country</label>
+                        <input type="text" ng-model="VendorDetails.Country" placeholder="Country *" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Establishment Year</label>
+                        <input type="number" ng-model="VendorDetails.EstablishmentYear" placeholder="Establishment Year *" required />
+                    </td>
+                    <td>
+                        <label>Nature Of Business</label>
+                        <input type="text" ng-model="VendorDetails.NatureOfBusiness" placeholder="Nature Of Business *" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Legal Status</label>
+                        <select ng-model="VendorDetails.LegalStatus" required>
+                            <option value="">Select Legal Status</option>
+                            <option value="Limited Company">Limited Company</option>
+                            <option value="Undertaking">Undertaking</option>
+                            <option value="Join Venture">Join Venture</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label>Company Category</label>
+                        <select ng-model="VendorDetails.CompanyCategory" required>
+                            <option value="">Select Category </option>
+                            <option value="Micro Unit As Per MSME">Micro Unit As Per MSME</option>
+                            <option value="Small Unit As Per MSME">Small Unit As Per MSME</option>
+                            <option value="Medium Unit As Per MSME">Medium Unit As Per MSME</option>
+                            <option value="Ancillary Unit">Ancillary Unit</option>
+                            <option value="Project Affected Persons of This Company">Project Affected Persons of This Company</option>
+                            <option value="SSI">SSI</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <label>PAN Number</label>
+                        <input type="text" ng-model="VendorDetails.PANNumber" placeholder="PAN Number *" required />
+                    </td>
+
+                    <td>
+                        <label>TIN Number</label>
+                        <input type="text" ng-model="VendorDetails.TINNumber" placeholder="TIN Number *" required />
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+
+            <table class="table new_table">
+                <tr>
+                    <th class="new_th">
+
+                        <strong>Contact Details</strong>
+
+                    </th>
+                    <th>&nbsp; &nbsp;</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Title</label>
+                        <select ng-model="VendorDetails.Title" required>
+                            <option value="">Select Title</option>
+                            <option value="Mr">Mr.</option>
+                            <option value="Mrs">Mrs.</option>
+                            <option value="Ms">Ms.</option>
+                            <option value="Dr">Dr.</option>
+                            <option value="Shri">Dhri</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label>Contact Name</label>
+                        <input type="text" ng-model="VendorDetails.ContactName" placeholder="Contact Name *" required />
+                    </td>
+                    
+                </tr>
+               
+            
+                <tr>
+                    <td>
+                        <label>Date To Birth</label>
+                    <input type="date" ng-model="VendorDetails.DOB" placeholder="DOB *" required /></td>
+                    <td>
+                        <label>Email</label>
+                        <input type="email" ng-model="VendorDetails.ContactEmail" placeholder="Email *" required />
+                      
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Designation</label>
+                    <input type="text" ng-model="VendorDetails.Designation" placeholder="Designation *" required /></td>
+                    <td>
+                        <label>Country Code</label>
+                    <input type="number" ng-model="VendorDetails.CountryCode" placeholder="Country Code *" required /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Mobile Number</label>
+                    <input type="text" ng-model="VendorDetails.MobileNumber" placeholder="Mobile Number *" required /></td>
+                    <td>
+                        <label>ISD/STD Code</label>
+                    <input type="number" ng-model="VendorDetails.ISD_STDCode" placeholder="ISD/STD Code *" /></td>
+                </tr>
+                <tr>
+                    
+                    <td>
+                        <label>Phone Number</label>
+                    <input type="number" ng-model="VendorDetails.PhoneNumber" placeholder="Phone Number *" style="width:100%;" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+
+            <table class="table new_table">
+                <tr>
+                    <th class="new_th">
+                       
+                        <strong>Bidder Pre Registration Details</strong>
+
+                    </th>
+                    <th>&nbsp; &nbsp;</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Bidder Pre Registration With</label>
+                        <select ng-model="VendorDetails.BidderPreRegisteredWith" ng-change="ChangeBidder()" required>
+                            <option value="">Choose Bidder Pre Registration With </option>
+                            <option value="MSME Registration">MSME Registration</option>
+                            <option value="Not Applicable">Not Applicable</option>
+                        </select>
+                    </td>
+                    <td>
+                        <label>Organisation Type</label>
+                        <select ng-show="displaybidderinfo" ng-model="VendorDetails.OrganisationType">
+                            <option value="">Select Organisation Type</option>
+                            <option value="Co-Operative">Co-Operative</option>
+                            <option value="Hindu Undivided Family">Hindu Undivided Family</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Private Limited Company">Private Limited Company</option>
+                            <option value="Proprietory">Proprietory</option>
+                            <option value="Public Limited Company">Public Limited Company</option>
+                            <option value="Self Help Group">Self Help Group</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </td>
+                </tr>
+
+                <tr ng-show="displaybidderinfo">
+                    <td>
+                    <label>
+                        Udyog Aadhar Number
+                    </label>
+                    <input type="text" ng-model="VendorDetails.UdyogAadharNumber" placeholder="Udyog Aadhar Number" /></td>
+                    <td>
+                        <label>Bidder Registered Type</label>
+                        <select ng-model="VendorDetails.BidderRegisteredType" ng-change="ChangeBidderType()">
+                            <option value="">Select Bidder Registered Type </option>
+                            <option value="Individual">Individual</option>
+                            <option value="Co-Operative">Co-Operative</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr ng-show="disptype">
+                    <td colspan="2">
+                        <label>Category</label>
+                        <select style="width:100%;" ng-model="VendorDetails.Category">
+                            <option value="">Select Category</option>
+                            <option value="General">General</option>
+                            <option value="OBC">OBC</option>
+                            <option value="SC">SC</option>
+                            <option value="ST">ST</option>
+                        </select>
+                    </td>
+                </tr>
+               
+            </table>
+        </div>
+
+
+        <input type="button" value="Back" ng-click="BacktoProfile();">
+        <input type="button" value="Update" ng-click="EditProfile();" class="btn-primary" />
+    </div>
+
+
+
+
+    <div class="table-responsive" style="display:block;" ng-show="showmobverify">
+        <div>
+            <h2 class="new_h2"> <strong>Mobile Verification</strong> </h2>
+        </div>
+
+        <div>
+            <form ng-submit="OTPVerification()">
+                <table class="table new_table">
+                    <tr>
+                        <td>
+                            <label>Mobile Number</label>
+                            <input type="text" placeholder="Enter Your Registered Mobile Number" ng-model="Verify.MobileNumber" required disabled/>
+                        </td>
+                        <td>
+                            <label>OTP Code</label>
+                            <input type="text" placeholder="OTP Code" ng-model="Verify.OTPCode" required />
+                        </td>
+                    </tr>
+                </table>
+
+                <a href="javascript:void(0)" class="new_a" ng-click="ResendOTP()">Resend OTP</a>
+
+                <input type="submit" value="Verify" class="btn-primary" />
+            </form>
+        </div>
+    </div> @*mobile verification*@
+
+
+    <div class="table-responsive" style="display:block;" ng-show="showEmailVerification">
+        <div>
+            <h2 class="new_h2"> <strong>Email Verification</strong> </h2>
+        </div>
+
+        <div>
+            <form ng-submit="EmailVerification()">
+                <table class="table new_table">
+                    <tr>
+                        <td>
+                            <label>Email </label>
+                            <input type="text" placeholder="Enter Your Registered Email" ng-model="EVerify.Email" required disabled/>
+                        </td>
+                        <td>
+                            <label>OTP Code</label>
+                            <input type="text" placeholder="OTP Code" ng-model="EVerify.OTPEmail" required />
+                        </td>
+                    </tr>
+                </table>
+
+                <a href="javascript:void(0)" class="new_a" ng-click="ResendOTPEmail()">Resend OTP</a>
+
+                <input type="submit" value="Verify" class="btn-primary" />
+            </form>
+        </div>
+    </div> @*mobile verification*@
+</div>

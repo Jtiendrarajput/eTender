@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/Admin/AngularModel/angular-min-1.4.8.js"></script>
+<script src="~/Areas/Admin/AngularModel/AddCommetteeMember.js"></script>
+<style>
+    .show{
+
+    }
+    .hide{
+        display:none;
+    }
+</style>
+<div class="table-responsive" ng-app="AppAddCommitteeMember" ng-controller="ControllerCommitteemember">
+
+
+    <div class="{{viewAdd}}">
+        <h1 class="new_h2"><strong> Add Committee Members </strong></h1>
+    </div>
+    <form ng-submit="submit()" class="{{viewAdd}}">
+        <div>
+
+
+            <table class="table new_table">
+
+                <tr>
+                    <td style="width:50%;">
+                        <label> Name</label>
+                        <input type="text" placeholder="Name" ng-model="Member.Name" required />
+                    </td>
+
+
+                    <td>
+                        <label>Mobile No.</label>
+                        <div>
+                            <input type="text" placeholder="+91" ng-model="Member.CountryCode" style="width:25% !important; float:left;" required />
+                            <input type="text" placeholder="7409051320" ng-model="Member.MobileNumber" style="width:70% !important; float:right ;" required />
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Email</label>
+                        <input type="email" ng-model="Member.Email" placeholder="xyz@gmail.com" required />
+                    </td>
+                    <td>
+                        <label>Address</label>
+                        <input type="text" ng-model="Member.Address" placeholder="Address" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Department</label>
+                        <input type="text" ng-model="Member.Department" placeholder="Department" required />
+                    </td>
+                    <td>
+                        <label>Designation</label>
+                        <input type="text" ng-model="Member.Designation" placeholder="Designation" />
+                    </td>
+                </tr>
+
+
+            </table>
+
+            @*!--tender fee div-->*@
+            <input type="button" value="Cancel" ng-click="cancel()" class="btn-primary" />
+            <input type="submit" value="{{Action}}" class="btn-primary" style="width: 15%;" />
+
+        </div>
+        <a href="javascript:void(0);" ng-click="all()">View All</a>
+    </form>
+
+    
+    <div class="{{ViewAll}}">
+        <h1 class="new_h2"><strong>All Committee Members </strong></h1>
+    </div>
+   
+    <div class="{{ViewAll}}">
+
+
+        <table class="table new_table">
+
+            <tr>
+                <th>Name</th>
+                <th>Mobile No.</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Department</th>
+                <th>Designation</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="item in AllMember">
+
+                <td>
+                    {{item.Name}}
+                </td>
+
+
+                <td>
+                    {{item.CountryCode}} {{item.MobileNumber}}
+                    <div class="{{item.visibleVerify}}">
+                        <input type="text" ng-model="item.OTP" />
+                        <a href="javascript:void(0);" ng-click="submitverify(item)">Verify</a>|<a href="javascript:void(0);" ng-click="cancelverify(item);">Cancel</a>
+                    </div>
+                    <a href="javascript:void(0);" ng-click="verify(item)" class="{{item.visibleVerifylnk}}">
+                        {{item.MobileVerify==0?'Verify':'Verified'}}
+                    </a>
+                    
+                    <a href="javascript:void(0);" ng-click="sendOTP(item)" ng-show="{{item.MobileVerify==0?true:false}}">
+                        |
+                        {{item.MobileVerify==0?'Send OTP':''}}
+                    </a>
+                </td>
+                <td>
+                    {{item.Email}}
+
+                </td>
+                <td>
+                    {{item.Address}}
+
+                </td>
+                <td>
+                    {{item.Department}}
+
+                </td>
+                <td>
+                    {{item.Designation}}
+
+                </td>
+                <td>
+                    <a href="javascript:void(0);" ng-click="edit(item)">Edit</a> |
+                    <a href="javascript:void(0);" ng-click="delete(item.ID)">Delete</a> 
+                </td>
+            </tr>
+
+
+
+        </table>
+
+        @*!--tender fee div-->*@
+
+
+        <a href="javascript:void(0)" ng-click="AddNew()">Add New Memeber</a>
+        <a href=""></a>
+    </div>
+    
+</div>

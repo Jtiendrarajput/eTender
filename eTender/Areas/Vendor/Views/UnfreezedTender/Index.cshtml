@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Vendor/Views/Shared/_layout.cshtml";
+}
+
+
+<script src="~/Areas/Vendor/AnglarModel/angular-min-1.4.8.js"></script>
+<script src="~/Areas/Vendor/AnglarModel/UnfreezedTender.js"></script>
+
+<link href="~/Resources/css/style.css" rel="stylesheet" />
+<div ng-app="OpeModel" ng-controller="UnfreezedController" style="overflow: auto !important;">
+   <div>
+       <div>
+           <h1 class="new_h2"><strong> Unfreezed Tender </strong></h1>
+       </div>
+     <div class="table-responsive">
+      
+        <table class="table new_table">
+            <thead>
+                <tr>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        Tender ID
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Department
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Bid Start Date
+                    </th>
+                    <th>
+                        Bid End Date
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in UnfreezedTenderDetails">
+                    <td>
+                        <input type="button" value="Continue Bidding" ng-click="ContinueBid(item.TenderID,item.ID)" />
+                    </td>
+                    <td>
+                        {{item.TenderID}}
+                    </td>
+                    <td>
+                        {{item.Title}}
+                    </td>
+                    <td>
+                        {{item.DepartmentName}}
+                    </td>
+                    <td>
+                        {{item.CategoryName}}
+                    </td>
+                    <td>
+                        {{item.BidStartDate  | date : 'dd-MMM-yyyy'}}
+                    </td>
+                    <td>
+                        {{item.FreezDate  | date : 'dd-MMM-yyyy'}}
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>

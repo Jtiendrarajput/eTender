@@ -1,0 +1,138 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+  
+    <div ng-app="myapp" ng-controller="MyCont">
+        <input type="button" id="signkey" ng-click="signKey()" value="Sign"/>
+        <br />
+        <input type="button" ng-click="CertExt()" value="Get Details of Certificate" />
+        <br />
+        <input type="button" ng-click="Auth()" value="check for Auth" />
+    </div>
+    
+    <script src="~/Scripts/angular-min-1.4.8.js"></script>
+    <script>
+        var model = angular.module("myapp", []);
+        model.controller("MyCont", function ($scope, DService,$http) {
+            $scope.signKey = function () {
+                DService.GetSignCommand().then(function (d) {
+                    var response= d.data.resp;
+                    $.post("http://127.0.0.1:1620", { "response": response }, function (d) {
+
+                        var status = $(d).find("status").text();
+                        if (status == "failed") {
+                            var error = $(d).find("error").text();
+                            var error_code = $(d).find("error").attr('code');
+                            alert('Error code : ' + error_code + '<br/>Error Message : ' + error + '</div>');
+                        }
+                        else {
+
+                            var data = $(d).find("data").text();
+                            var filetype = $(d).find("attribute").text();
+
+                            
+                            alert(data);
+                        }
+
+
+                    }).fail(function (xhr, textStatus, errorThrown) {
+                        console.log(" Server response not received.");
+                        $("#msgtext").html("<div class='danger'>Signing services  not running..</div>");
+                    });
+                    
+
+
+                }, function (er) { });
+            };
+            $scope.CertExt = function () {
+                DService.GetCertExtCommand().then(function (d) { 
+                    var response = d.data.resp;
+                $.post("http://127.0.0.1:1620", { "response": response }, function (d) {
+
+
+                    var status = $(d).find("status").text();
+                    if (status == "failed") {
+                        var error = $(d).find("error").text();
+                        var error_code = $(d).find("error").attr('code');
+                        alert('Error code : ' + error_code + '<br/>Error Message : ' + error + '</div>');
+                    }
+                    else {
+
+                        var data = $(d).find("data").text();
+                        var filetype = $(d).find("attribute").text();
+
+                        DService.GetCertDetails(data).then(function (crt) {
+                            var rs = crt.data;
+                            alert(JSON.stringify(rs));
+                        }, function () { });
+                       
+                    }
+
+
+
+                }).fail(function (xhr, textStatus, errorThrown) {
+                    console.log(" Server response not received.");
+                    $("#msgtext").html("<div class='danger'>Signing services  not running..</div>");
+                });
+                }, function (e) { });
+            };
+            $scope.Auth = function () {
+                DService.GetAuthCommand().then(function (d) {
+                    var response = d.data.resp;
+                    $.post("http://127.0.0.1:1620", { "response": response }, function (d) {
+
+
+                        var status = $(d).find("status").text();
+                        if (status == "failed") {
+                            var error = $(d).find("error").text();
+                            var error_code = $(d).find("error").attr('code');
+                            alert('Error code : ' + error_code + '<br/>Error Message : ' + error + '</div>');
+                        }
+                        else {
+
+                            var data = $(d).find("data").text();
+                            var filetype = $(d).find("attribute").text();
+
+
+                            alert(data);
+                        }
+
+
+
+                    }).fail(function (xhr, textStatus, errorThrown) {
+                        console.log(" Server response not received.");
+                        $("#msgtext").html("<div class='danger'>Signing services  not running..</div>");
+                    });
+                }, function (e) { });
+            };
+        });
+        model.factory("DService", function ($http) {
+            var fac = {};
+            fac.GetSignCommand = function () {
+                return $http.get('/DSCcommand/Signin');
+            };
+            fac.GetCertExtCommand = function () {
+                return $http.get('/DSCcommand/CertExtCommanccd');
+            };
+            fac.GetAuthCommand = function () {
+                return $http.get('/DSCcommand/AuthCommanccd');
+            };
+            fac.GetCertDetails = function (bs) {
+                return $http.get('/DSCcommand/GetCertificateDetails', { params: {baseString: bs }});
+            };
+            return fac;
+        });
+    </script>
+</body>
+</html>

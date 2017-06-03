@@ -1,0 +1,349 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Committee/Views/Shared/_layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="~/Areas/Committee/AngularModel/angular-min-1.4.8.js"></script>
+<script src="~/Areas/Committee/AngularModel/FreezedTendorForTechnical.js"></script>
+ 
+<div ng-app="AFFTModel" ng-controller="AFFTController">
+    <div ng-show="ShowTendorList">
+        <div>
+            <h2 class="new_h2"> <strong>All Freezed Tender For Technical Bid Opening</strong> </h2>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table new_table">
+
+                <tr>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        Tender ID
+                    </th>
+                    <th>
+                        Title
+                    </th>
+                    <th>
+                        Published By
+                    </th>
+                    <th>
+                        Department Code
+                    </th>
+                    <th>
+                        Department Name
+                    </th>
+                    <th>
+                        Category Code
+                    </th>
+                    <th>
+                        Category Name
+                    </th>
+
+                </tr>
+
+                <tr ng-repeat="item in TendorList">
+                    <td>
+                        <a href="javascript:void(0);" ng-click="ViewBidders(item.ID,item.TenderID);">View Bidders</a>
+                    </td>
+                    <td>
+                        {{item.TenderID}}
+                    </td>
+                    <td>
+                        {{item.Title}}
+                    </td>
+                    <td>
+                        {{item.UserName}}
+                    </td>
+                    <td>
+                        {{item.DeptCode}}
+                    </td>
+                    <td>
+                        {{item.DeptName}}
+                    </td>
+                    <td>
+                        {{item.CatCode}}
+                    </td>
+                    <td>
+                        {{item.CateName}}
+                    </td>
+
+
+                </tr>
+            </table>
+
+
+        </div>
+    </div>
+
+    <div ng-show="ViewBidderList">
+        <div>
+            <h2 class="new_h2"> <strong>All Bidders for TenderID: {{TendorUniqueID}}</strong> </h2>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table new_table">
+
+                <tr>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        Company Name
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Mobile Number
+                    </th>
+                    <th>
+                        Phone Number
+                    </th>
+                    <th>
+                        Designation
+                    </th>
+                    <th>
+                        Registration Number
+                    </th>
+
+                    <th>
+                        Registered Address
+                    </th>
+
+                    <th>
+                        DOB
+                    </th>
+
+                </tr>
+
+                <tr ng-repeat="item in BiddersList">
+                    <td>
+                        <a href="javascript:void(0);" ng-click="OpenTechnicalBid(item);">Open Technical Bid</a>
+                    </td>
+                    <td>
+                        {{item.CompanyName}}
+                    </td>
+                    <td>
+                        {{item.Email}}
+                    </td>
+
+                    <td>
+                        {{item.CountryCode +" " + item.MobileNumber}}
+                    </td>
+                    <td>
+                        {{item.ISD_STDCode + " " + item.PhoneNumber}}
+                    </td>
+                    <td>
+                        {{item.Designation}}
+                    </td>
+                    <td>
+                        {{item.RegistrationNo}}
+                    </td>
+                    <td>
+                        {{item.RegisteredAddress + " " + item.City + " " + item.State + " " +item.Country + " " + item.PostalCode}}
+                    </td>
+                    <td>
+                        {{item.DOB | date: dd-MMM-yyyy}}
+                    </td>
+
+                </tr>
+            </table>
+
+            <input type="button" ng-click="BackfromBidder()" value="Back" />
+
+        </div>
+
+    </div>
+
+    <div ng-show="OpenTechnicalBidView">
+        <div>
+            <h2 class="new_h2"> <strong>Bidding for TenderID: {{TendorUniqueID}}</strong> </h2>
+        </div>
+        <div class="table-responsive">
+
+
+            <table class="table new_table">
+                <tr>
+                    <th class="new_th"><strong>Vendor Details</strong></th>
+                    <th>&nbsp;</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Company Detail</label>
+                        <p>{{BidDetails.CompanyName}}</p>
+                    </td>
+                    <td>
+                        <label>Registration No</label>
+                        <p>{{BidDetails.RegistrationNo}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Registered Address</label>
+                        <p>{{BidDetails.RegisteredAddress + " " + BidDetails.City + " "+ BidDetails.State + " " + BidDetails.Country + " " + BidDetails.PostalCode}}</p>
+                    </td>
+                    <td>
+                        <label>Email</label>
+                        <p>{{BidDetails.Email}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Mobile Number</label>
+                        <p>{{BidDetails.CountryCode + " " +BidDetails.MobileNumber}}</p>
+                    </td>
+                    <td>
+                        <label>Phone Number</label>
+                        <p>
+                            {{BidDetails.ISD_STDCode + " " +BidDetails.PhoneNumber}}
+                        </p>
+                    </td>
+                </tr>
+            </table> @*Table Displaying Vendor Details*@
+            <table class="table new_table">
+                <tr>
+                    <th class="new_th"><strong>Bidding Details</strong></th>
+                    <th>&nbsp;</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Bid ID</label>
+                        <p>{{BidDetails.BidID}}</p>
+                    </td>
+                    <td>
+                        <label>Bid Submit Date</label>
+                        <p>{{BidDetails.BidSubmitDate | date:dd-MMM-yyyy}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Tender Fee Reference ID </label>
+                        <p>{{BidDetails.TechRefID}}</p>
+                    </td>
+                    <td>
+                        <label>Tender Fee Reference Issuer Name</label>
+                        <p>{{BidDetails.TechIssuer}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Tender Fee Reference Valid Upto</label>
+                        <p>{{BidDetails.TechValidUpto | date:dd-MMM-yyyy}}</p>
+                    </td>
+                    <td>
+                        <label>EMD Fee Reference ID </label>
+                        <p>{{BidDetails.EMDRefId}}</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>EMD Fee Reference Issuer Name</label>
+                        <p>{{BidDetails.EMDIssuer}}</p>
+                    </td>
+                    <td>
+                        <label>EMD Fee Reference Valid Upto </label>
+                        <p>{{BidDetails.EMDValidUpto | date:dd-MMM-yyyy}}</p>
+                    </td>
+                </tr>
+
+            </table>  @*Table Displaying Bidding Details*@
+
+            <table class="table new_table">
+                <tr>
+                    <th class="new_th"><strong>Download Document</strong></th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Technical Document</label>
+                        <p><a href="{{BidDetails.TechDoc}}"> Download</a></p>
+                    </td>
+                </tr>
+
+            </table>  @*Table for Download*@
+
+            <table class="table new_table">
+                <tr>
+                    <th class="new_th"><strong>Change Status</strong></th>
+                    <th>&nbsp;</th>
+                </tr>
+                <tr>
+                    <td>
+                        @*{BidDetails.BidStatusID}}*@
+                        <select ng-model="BidDetails.BidStatusID" ng-change="AlertBidStatusID()" required>
+                            <option value="0" ng-selected="">-- Select --</option>
+                            <option value="1" ng-selected="">To be Opened</option>
+                            <option value="2" ng-selected="">Opened</option>
+                            <option value="3" ng-selected="">Under Processing</option>
+
+                            <option value="4" ng-selected="">Approved</option>
+                            <option value="5" ng-selected="">Reject</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="button" ng-click="UpdateStatus();" value="Update Status" />
+                    </td>
+
+                </tr>
+
+            </table>  @*Table for Change Status*@
+
+
+
+
+        </div>
+
+    </div>
+    @*<a href="javascript:void(0);" id="OpenPopup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-show="false">Open Modal</a>*@
+    <button id="OpenPopup" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" ng-show="false">Open Modal</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog" ng-show="true">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+      <div class="modal-content" class="table-responsive">
+          <div class="modal-header">
+              <button style="float:right;" id="ClosePopup" type="button" class="close" data-dismiss="modal">&times;</button>
+              <h2 class="modal-title">Modal Header</h2>
+          </div>
+          <div class="modal-body">
+              <form ng-submit="VerifyOTPForAll()">
+                  <table class="table new_table">
+                      <tr>
+                          <th>
+                              Name
+                          </th>
+                          <th>
+                             Enter OTP
+                          </th>
+                      </tr>
+                      <tr ng-repeat="item in OTPDataCM.CommitteeMember">
+                          <td>
+                              {{item.Name}}
+                          </td>
+                          <td>
+                              <input type="text" ng-model="item.OTP" required />
+                          </td>
+                      </tr>
+                  </table>
+                  <input type="submit" value="Submit" />
+
+              </form>
+          </div>
+
+      </div>
+
+  </div>
+</div> 
+
+</div>

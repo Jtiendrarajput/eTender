@@ -1,0 +1,275 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Vendor/Views/Shared/_layout.cshtml";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Areas/Vendor/AnglarModel/angular-min-1.4.8.js"></script>
+<script src="~/Areas/Vendor/AnglarModel/Bid.js"></script>
+<input type="hidden" id="tenderid" value="@ViewBag.TenderID" />
+<div ng-app="Mybid" ng-controller="BidController">
+    <div class="table-responsive">
+        <div>
+            <h1 class="new_h2"><strong> Start Bidding </strong></h1>
+        </div>
+
+
+      
+        <table class="table new_table">
+            <tr>
+                <th class="new_th"><strong>Tender Details</strong></th>
+                <th>&nbsp;</th>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Tender ID</label>
+                    <p>{{TendorViewDetails.TenderID}}</p>
+                </td>
+                <td>
+                    <label>Title</label>
+                    <p>{{TendorViewDetails.Title}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Department</label>
+                    <p>{{DepartmentName}}</p>
+                </td>
+                <td>
+                    <label>Category</label>
+                    <p>{{CategoryName}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Published By</label>
+                    <p>{{UserName}}</p>
+                </td>
+                <td>
+                    <label>Tender Fee (&#8377;)</label>
+                    <p>{{TendorViewDetails.TenderFee}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>EMD Fee (&#8377;)</label>
+                    <p>{{TendorViewDetails.EMDFee}}</p>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>  @*Tender Details*@
+
+    <div ng-show="ViewFeediv" class="table-responsive">
+        <div>
+          
+            <table class="table new_table">
+
+                <tr>
+                    <th class="new_th"><strong>Tender Fee</strong></th>
+                    <th>&nbsp;</th>
+
+                </tr>
+                <tr>
+                    <td>
+                        <label>Fee Amount (&#8377;): &nbsp;</label> 
+                        <input type="text" ng-model="TendorViewDetails.TenderFee" disabled />
+                    </td>
+
+
+                    <td>
+                        <label>Reference ID (Challan No./TransactionID/DD No./FDR No.)</label> 
+                        <input type="text" ng-model="BidDetails.TechRefID" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Issuer Name (Bank Name/Online Payment)</label> 
+                        <input type="text" ng-model="BidDetails.TechIssuer" required/>
+                    </td>
+                    <td>
+                        <label>Valid Upto (FDR/DD Valid Upto Date)</label> 
+                        <input type="date" ng-model="BidDetails.TechValidUpto" />
+                    </td>
+                </tr>
+                @*<tr>
+                    <td>
+                        <input type="file" id="file1" name="file"
+                               ng-files="getTheFilesTenderFEE($files)" />
+                    </td>
+                    <td>
+                        <input type="button" value="upload" ng-click="UploadTenderFeeDoc()" />
+                    </td>
+                </tr>*@
+            </table>
+          
+        </div> @*!--tender fee div-->*@
+        <div class="form myform">
+            <form>
+                
+
+                <table class="table new_table">
+                    <tr>
+                        <th class="new_th"><strong>Earnest Money Deposit(EMD) Fee</strong></th>
+                        <th>&nbsp;</th>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Fee Amount (&#8377;): &nbsp;</label> 
+                            <input type="text" ng-model="TendorViewDetails.EMDFee" disabled />
+                        </td>
+
+
+                        <td>
+                            <label>Reference ID (Challan No./TransactionID/DD No./FDR No.)</label> 
+                            <input type="text" ng-model="BidDetails.EMDRefId" required/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Issuer Name (Bank Name/Online Payment)</label> 
+                            <input type="text" ng-model="BidDetails.EMDIssuer" required/>
+                        </td>
+                        <td>
+                            <label>Valid Upto (FDR/DD Valid Upto Date)</label> 
+                            <input type="date" ng-model="BidDetails.EMDValidUpto" />
+                        </td>
+                    </tr>
+                    @*<tr>
+                        <td>
+                            <input type="file" id="file1" name="file"
+                                   ng-files="getTheFilesEMDFEE($files)" />
+                        </td>
+                        <td>
+                            <input type="button" value="upload" ng-click="UploadEMDFeeDoc()" />
+                        </td>
+                    </tr>*@
+                </table>
+            </form>
+        </div>  @*!--EMD fee div-->*@
+
+        <input type="button" value="Continue >>" ng-click="Encrypt()" class="btn-primary"/>
+    </div>  @*Fee Details and Proof Upload*@
+
+    <div ng-show="ViewBidDocdiv" class="table-responsive">
+        <div>
+            <h3 style="font-size: 25px;"><strong>Technical Document Upload</strong></h3>
+           <br />
+            <input type="file" id="file1" name="file" ng-files="getTheFilestech($files)" required/>
+            <input type="button" value="upload" ng-click="uploadtech()" />
+          
+        </div> @*!--technical document upload-->*@
+
+        
+        <input type="button" value="Continue >>" ng-click="ContinueTechnical()" class="btn-primary" />&nbsp;
+        <input type="button" value="<< Back" ng-click="BackFromTech()" class="btn-primary" />
+    </div> @*!--Technical and Financial document upload-->*@
+
+
+
+    <div ng-show="ViewFinancialBidDocdiv" class="table-responsive">
+     
+        <div>
+            <h3 style="font-size: 25px;"><strong>Financial Document Upload</strong></h3>
+            <br />
+            <input type="file" id="file2" name="file" ng-files="getTheFilesFinancial($files)" required />
+            <input type="button" value="upload" ng-click="UploadFinancialDoc()" />
+           
+        </div> @*!--Financial document upload-->*@
+
+        <input type="button" value="Continue >>" ng-click="Continue()" class="btn-primary" />&nbsp;
+        <input type="button" value="<< Back" ng-click="BackFromFinancial()" class="btn-primary" />
+    </div> @*!--Technical and Financial document upload-->*@
+
+
+
+    <div ng-show="ViewAllDetails" class="table-responsive">
+       
+        <table class="table new_table">
+            <tr>
+                <th class="new_th"><strong>Tender Fee Details</strong></th>
+                <th>&nbsp;</th>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Reference ID</label>
+                    <p>{{BidDetails.TechRefID}}</p>
+                </td>
+                <td>
+                    <label>Issuer Name</label>
+                    <p>{{BidDetails.TechIssuer}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Valid Upto</label>
+                    <p>{{BidDetails.TechValidUpto | date : 'dd-MMM-yyyy'}}</p>
+                </td>
+                <td>
+                    @*<label>Proof of Payment</label>
+                    <p>{{BidDetails.TenderDoc}}</p>*@
+                </td>
+            </tr>
+        </table> @*Tender Fee Details*@
+
+        
+        <table class="table new_table">
+            <tr>
+                <th class="new_th"><strong>EMD Fee Details</strong></th>
+                <th>&nbsp;</th>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Reference ID</label>
+                    <p>{{BidDetails.EMDRefId}}</p>
+                </td>
+                <td>
+                    <label>Issuer Name</label>
+                    <p>{{BidDetails.EMDIssuer}}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label>Valid Upto</label>
+                    <p>{{BidDetails.EMDValidUpto | date : 'dd-MMM-yyyy'}}</p>
+                </td>
+                <td>
+                    @*<label>Proof of Payment</label>
+                    <p>{{BidDetails.EMDDoc}}</p>*@
+                </td>
+            </tr>
+        </table> @*EMD Fee Details*@
+
+        
+        <table class="table new_table">
+            <tr>
+                <th class="new_th"><strong>Technical and Financial Document</strong></th>
+                <th>&nbsp;</th>
+
+            </tr>
+            <tr>
+                <td>
+                    <label>Technical Document</label>
+                    <p><a href="~/TechDocument/{{BidDetails.TechDoc}}" download> Download</a></p>
+                </td>
+                <td>
+                    <label>Financial Document</label>
+                    <p><a href="~/FinancialDocument/{{BidDetails.FinancialDoc}}" download>Download</a> </p>
+                </td>
+            </tr>
+            </table> @*Technical and Financial document Details*@
+
+      
+        <input type="button" value="Freeze Bid" ng-click="Freezed()" class="btn-primary" />&nbsp;
+        <input type="button" value="<< Back" ng-click="BacktoForm()" class="btn-primary" />
+    </div>  @*Display All Details*@
+
+    @*<input type="file" id="file1" name="file"
+           ng-files="getTheFilestech($files)" />
+    <input type="button" value="upload" ng-click="uploadtech()" />*@
+
+</div>

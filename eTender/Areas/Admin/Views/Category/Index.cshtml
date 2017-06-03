@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<script src="~/Areas/Admin/AngularModel/angular-min-1.4.8.js"></script>
+<script src="~/Areas/Admin/AngularModel/Category.js"></script>
+<div ng-app="CatModel" ng-controller="CatController">
+
+    <div>
+        <div>
+            <h1 class="new_h2"><strong>Category </strong></h1>
+        </div>
+    <div class="table-responsive ">
+
+      
+        <form ng-submit="ActionCat();">
+            <div>
+
+                <table class="table new_table">
+
+                    <tr>
+                        <td>
+                            Category Code
+                            <input type="text" placeholder="Enter Category Code *" ng-model="CatDetails.CatCode" required />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>
+                            Category Name
+                            <input type="text" placeholder="Enter Category Name *" ng-model="CatDetails.CategoryName" required />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="submit" style="float:right;" value="{{Action}}" /> &nbsp;
+                            <input type="button" style="float:right;" value="Cancel" ng-click="Cancel()" />
+                        </td>
+                    </tr>
+                </table>
+            </div> @*!--tender fee div-->*@
+
+
+
+        </form>
+    </div>
+    </div>
+
+    <div>
+        <div>
+            <h1 class="new_h2"><strong>Category List </strong></h1>
+        </div>
+
+    <div class="table-responsive">
+       
+        <div>
+
+            <table class="table new_table">
+
+                <tr>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        Category Code
+                    </th>
+                    <th>
+                        Category Name
+                    </th>
+
+                </tr>
+                <tr ng-repeat="item in CatList">
+                    <td>
+                        <a href="javascript:void(0);" ng-click="Edit(item)">Edit</a> |
+                        <a href="javascript:void(0);" ng-click="Delete(item.ID)">Delete</a>
+
+                    </td>
+                    <td>
+
+                        {{item.CatCode}}
+                    </td>
+
+
+                    <td>
+
+                        {{item.CategoryName}}
+                    </td>
+                </tr>
+
+            </table>
+
+        </div> @*!--tender fee div-->*@
+
+    </div>
+    </div>
+</div>

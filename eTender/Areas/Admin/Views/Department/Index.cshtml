@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+<script src="~/Areas/Admin/AngularModel/angular-min-1.4.8.js"></script>
+<script src="~/Areas/Admin/AngularModel/Department.js"></script>
+
+
+<div ng-app="DeptModel" ng-controller="DeptController">
+    
+    <div>
+        <div>
+            <h1 class="new_h2"><strong>Department </strong></h1>
+        </div>
+    <div class="table-responsive ">
+
+     
+        <form ng-submit="ActionDept();">
+            <div>
+
+                <table class="table new_table">
+
+                    <tr>
+                        <td>
+                            Department Code
+                            <input type="text" placeholder="Enter Department Code *" ng-model="DeptDetails.DeptCode" required />
+                        </td>
+
+                        </tr>
+                    <tr>
+                        <td>
+                            Department Name
+                            <input type="text" placeholder="Enter Department Name *" ng-model="DeptDetails.DepartmentName" required />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="submit" style="float:right;"  value="{{Action}}"  /> &nbsp;
+                            <input type="button" style="float:right;" value="Cancel" ng-click="Cancel()"/>
+                        </td>
+                    </tr>
+                </table>
+            </div> @*!--tender fee div-->*@
+
+
+           
+        </form>
+    </div>
+    </div>
+
+    <div>
+        <div>
+            <h1 class="new_h2"><strong>Department List </strong></h1>
+        </div>
+    <div class="table-responsive" >
+        
+
+        <div>
+
+            <table class="table new_table">
+
+                <tr>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        Department Code
+                    </th>
+                    <th>
+                        Department Name
+                    </th>
+
+                </tr>
+                <tr ng-repeat="item in DeptList">
+                    <td>
+                        <a href="javascript:void(0);" ng-click="Edit(item)" >Edit</a>|
+                        <a href="javascript:void(0);" ng-click="Delete(item.ID)">Delete</a>
+                      
+                    </td>
+                    <td>
+
+                        {{item.DeptCode}}
+                    </td>
+
+
+                    <td>
+
+                        {{item.DepartmentName}}
+                    </td>
+                </tr>
+
+            </table>
+
+        </div> @*!--tender fee div-->*@
+
+    </div>
+    </div>
+</div>

@@ -1,0 +1,262 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>e-Procurement System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <link href="~/Resources/css/style.css" rel="stylesheet" />
+    <script src="~/Scripts/angular-min-1.4.8.js"></script>
+    <script src="~/Scripts/Vendor.js"></script>
+    <style>
+        select, .myform input {
+            width: 190px;
+        }
+
+        td {
+            padding: 5px;
+        }
+                .textcolortrue
+    {
+color: red;
+    }
+
+    .textcolorfalse
+    {
+color: white;
+    }
+	select, .myform input {
+	width:190px;
+}
+td {
+	padding: 5px;
+}
+.container {
+	width:980px;
+	margin:0 auto;
+	padding:20px;
+	background:#fff;
+}
+.col-md-6 {
+	width: 45%;
+	float: left;
+}
+    </style>
+</head>
+
+<body ng-controller="VendorController" ng-app="OpeModel">
+
+    <!Form Mixin>
+    <!Input Mixin>
+    <!Button Mixin>
+    <!Pen Title>
+	<div class="container">
+  <div class="col-md-6 mrgn-right">
+    <div class="pen-title">
+        <img src="~/Resources/img/npp-logo.png" width="330" />
+    </div>
+    <!Form Module>
+    <div class="module form-module">
+        <div class="toggle" ng-click="togelclick()">
+            <i class="fa fa-times fa-pencil"></i>
+            <div class="tooltip">Create Account </div>
+        </div>
+
+
+        <div class="form" ng-show="showlogin">
+            <h2>Login to your account</h2>
+            <form ng-submit="Login()">
+                <input type="text" placeholder="Username *" ng-model="LoginDetails.UserName" required />
+                <input type="password" placeholder="Password *" ng-model="LoginDetails.PassWord" required />
+               
+                <input type="submit" value="Login" />
+            </form>
+        </div>
+
+
+
+        <div class="form myform" ng-show="showlogin">
+            <h2>Create an account</h2>
+            <form ng-submit="SIGNUP()">
+                <table class="">
+                    <tr>
+                        <td><input type="email" ng-model="VendorDetails.Email" placeholder="Email ID *" required /></td>
+                        <td><input id="pwd1" type="password" ng-focus="true" placeholder="Password *" ng-model="VendorDetails.Password" ng-blur="PWDMATCH();" required /></td>
+
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div ng-class="{textcolortrue: fpwdclass, textcolorfalse: !fpwdclass}">{{innerhtml}}</div>
+                            <input id="pwd2" type="password" ng-focus="false" placeholder="Confirm Password *" ng-blur="CPMATCH()" ng-model="VendorDetails.ConfirmPassword" required />
+                        </td>
+                    </tr>
+                </table>
+                <h2>Company Details</h2>
+                <table>
+                    <tr>
+                        <td><input type="text" ng-model="VendorDetails.CompanyName" placeholder="Company Name *" required /></td>
+                        <td><input type="text" ng-model="VendorDetails.RegistrationNo" placeholder="Registration Number" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" ng-model="VendorDetails.RegisteredAddress" placeholder="Registered Address *" required /></td>
+                        <td><input type="text" ng-model="VendorDetails.NameOfPartners" placeholder="Name Of Partners / Directors *" required /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" ng-model="VendorDetails.City" placeholder="City *" required /></td>
+                        <td><input type="text" ng-model="VendorDetails.State" placeholder="State *" required /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" ng-model="VendorDetails.PostalCode" placeholder="Postal Code *" required /></td>
+                        <td><input type="text" ng-model="VendorDetails.Country" placeholder="Country *" required /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" ng-model="VendorDetails.EstablishmentYear" placeholder="Establishment Year" /></td>
+                        <td><input type="text" ng-model="VendorDetails.NatureOfBusiness" placeholder="Nature Of Business"  /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" ng-model="VendorDetails.PANNumber" placeholder="PAN Number *" required /></td>
+                        <td><input type="text" ng-model="VendorDetails.TINNumber" placeholder="TIN/VAT/Serv. Tax Number *" required /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <select ng-model="VendorDetails.LegalStatus" required>
+                                <option value="">Select Legal Status</option>
+                                <option value="Private Limited Company">Private Limited Company</option>
+                                <option value="Public Limited Company">Public Limited Company</option>
+                                <option value="Undertaking">Undertaking</option>
+                                <option value="Join Venture">Join Venture</option>
+                                <option value="Partnership">Partnership</option>
+                                <option value="Proprietorship">Proprietorship</option>
+                                <option value="Limited Liability Partnership">Limited Liability Partnership</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select ng-model="VendorDetails.CompanyCategory">
+                                <option value="">Select Category </option>
+                                <option value="Micro Unit As Per MSME">Micro Unit As Per MSME</option>
+                                <option value="Small Unit As Per MSME">Small Unit As Per MSME</option>
+                                <option value="Medium Unit As Per MSME">Medium Unit As Per MSME</option>
+                                <option value="Ancillary Unit">Ancillary Unit</option>
+                                <option value="Project Affected Persons of This Company">Project Affected Persons of This Company</option>
+                                <option value="SSI">SSI</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <h2>Contact Details</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <select ng-model="VendorDetails.Title" required>
+                                <option value="">Select Title</option>
+                                <option value="Mr">Mr.</option>
+                                <option value="Mrs">Mrs.</option>
+                                <option value="Ms">Ms.</option>
+                                <option value="Dr">Dr.</option>
+                               
+                            </select>
+                        </td>
+                        <td><input type="text" ng-model="VendorDetails.ContactName" placeholder="Contact Name *" required /></td>
+                    </tr>
+                   
+                    <tr>
+                        <td><input type="text" id="dobid" ng-model="VendorDetails.DOB" placeholder="Date of Birth "  /></td>
+                        <td><input type="email" ng-model="VendorDetails.ContactEmail" placeholder="Email "  /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" ng-model="VendorDetails.Designation" placeholder="Designation *" required /></td>
+                        <td><input type="number" ng-model="VendorDetails.CountryCode" placeholder="Country Code *" required /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="number" ng-model="VendorDetails.MobileNumber" placeholder="Mobile Number *" required /></td>
+                        <td><input type="number" ng-model="VendorDetails.ISD_STDCode" placeholder="ISD/STD Code *" /></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><input type="number" ng-model="VendorDetails.PhoneNumber" placeholder="Phone Number *" style="width:100%;" /></td>
+                    </tr>
+                </table>
+                <h2>Bidder Pre Registration Details</h2>
+                <table>
+                    <tr>
+                        <td>
+                            <select ng-model="VendorDetails.BidderPreRegisteredWith" ng-change="ChangeBidder()" >
+                                <option value="">Choose Bidder Pre Registration With </option>
+                                <option value="MSME Registration">MSME Registration</option>
+                                <option value="Not Applicable">Not Applicable</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select ng-show="displaybidderinfo" ng-model="VendorDetails.OrganisationType">
+                                <option value="">Select Organisation Type</option>
+                                <option value="Co-Operative">Co-Operative</option>
+                                <option value="Hindu Undivided Family">Hindu Undivided Family</option>
+                                <option value="Partnership">Partnership</option>
+                                <option value="Private Limited Company">Private Limited Company</option>
+                                <option value="Proprietory">Proprietory</option>
+                                <option value="Public Limited Company">Public Limited Company</option>
+                                <option value="Self Help Group">Self Help Group</option>
+                                <option value="Others">Others</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" ng-model="VendorDetails.UdyogAadharNumber" placeholder="Udyog Aadhar Number" ng-show="displaybidderinfo" /></td>
+                        <td>
+                            <select ng-show="displaybidderinfo" ng-model="VendorDetails.BidderRegisteredType" ng-change="ChangeBidderType()">
+                                <option value="">Select Bidder Registered Type </option>
+                                <option value="Individual">Individual</option>
+                                <option value="Co-Operative">Co-Operative</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <select style="width:100%;" ng-model="VendorDetails.Category" ng-show="disptype">
+                                <option value="">Select Category</option>
+                                <option value="General">General</option>
+                                <option value="OBC">OBC</option>
+                                <option value="SC">SC</option>
+                                <option value="ST">ST</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+                <input type="submit" value="Register" />
+            </form>
+        </div> 
+
+ <div id="login">
+     <div ng-click="togelclick()">Create Account </div>
+      </div>
+
+        <div class="form" style="display:block;" ng-show="showmobverify">
+            <h2>Mobile Verification</h2>
+            <form ng-submit="OTPVerification()">
+                <input type="text" placeholder="Enter Your Registered Mobile Number" ng-model="Verify.MobileNumber" required />
+                <input type="text" placeholder="OTP Code for Mobile" ng-model="Verify.OTPCode" required />
+                <a href="javascript:void(0)" ng-click="ResendOTP()">Resend OTP</a>
+
+                <input type="submit" value="Verify" />
+            </form>
+        </div> 
+       </div> </div>
+		
+<div class="col-md-6">
+    <div class="pen-title" align="right" style="padding-top: 35px;"> <img src="~/Resources/img/tech.png" width="330" style="float:right; margin-bottom:50px;"/> </div>
+    <a href="#" class="fright"><img src="~/Resources/img/help.jpg" width="350"/></a> 
+    <a href="tel:+91 9758422442" class="fright"><img src="~/Resources/img/call-us.jpg" width="350"/></a> </div>
+
+        <div class="cta">e-Procurement System. Developed by <a href="#">India Interactive</a></div>
+    </div></div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    @*<script src="~/Resources/js/index.js"></script>*@
+</body>
+</html>

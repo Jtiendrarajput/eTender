@@ -46,3 +46,15 @@ C:\Dot Net Project\eTender\eTenderService\eTenderService\bin\Debug\EntityFramewo
 C:\Dot Net Project\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.dll
 C:\Dot Net Project\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.pdb
 C:\Dot Net Project\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.csprojResolveAssemblyReference.cache
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.csprojResolveAssemblyReference.cache
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll.config
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.dll
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\eTenderService.pdb
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.dll
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\eTender.EncryptDecrypt.dll
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\eTender.EncryptDecrypt.pdb
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.xml
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.dll
+C:\Users\durgesh.kumar\Source\Repos\eTender\eTenderService\eTenderService\obj\Debug\eTenderService.pdb

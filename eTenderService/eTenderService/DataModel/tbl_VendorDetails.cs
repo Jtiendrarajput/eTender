@@ -10,8 +10,11 @@ namespace eTenderService.DataModel
        public int ID { get; set; }
        public int userID { get; set; }
        public string Email { get; set; }
+       [Encrypted]
        public string CompanyName { get; set; }
+       [Encrypted]
        public string RegistrationNo { get; set; }
+       [Encrypted]
        public string RegisteredAddress { get; set; }
        public string NameOfPartners { get; set; }
        public string City { get; set; }

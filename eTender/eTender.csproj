@@ -250,6 +250,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eTender.EncryptDecrypt\eTender.EncryptDecrypt.csproj">
+      <Project>{ab09bfbc-5c23-41cf-9a20-203a78ee0a82}</Project>
+      <Name>eTender.EncryptDecrypt</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eTenderService\eTenderService\eTenderService.csproj">
       <Project>{567c61ac-6213-4a3f-af95-52eb8e71d571}</Project>
       <Name>eTenderService</Name>

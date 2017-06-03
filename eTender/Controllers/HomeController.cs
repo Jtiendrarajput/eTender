@@ -7,6 +7,9 @@ using eTenderService.DataModel;
 using eTenderService.DataAccess;
 using eTenderService.Tempmodel;
 using WebMatrix.WebData;
+using eTender.EncryptDecrypt;
+using eTenderService.Extension;
+
 namespace eTender.Controllers
 {
     public class HomeController : Controller
@@ -82,7 +85,8 @@ namespace eTender.Controllers
                 {
                     using (DB db = new DB())
                     {
-                        tbl_VendorDetails vd = db.tblVendorDetails.FirstOrDefault(x => x.Email == login.UserName);
+
+                        tbl_VendorDetails vd = db.tblVendorDetails.FirstOrDefault(x => x.Email == login.UserName);//.DecryptEntity< tbl_VendorDetails>();
                         vd.LastLoginDatenTime = vd.currentLogindate;
                         vd.LastLoginIP = vd.currentIP;
                         vd.currentIP = this.Request.ServerVariables["REMOTE_ADDR"];

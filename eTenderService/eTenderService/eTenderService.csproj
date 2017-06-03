@@ -49,7 +49,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="DataAccess\ADashUserProfile.cs" />
     <Compile Include="DataAccess\All_AllotedTenders.cs" />
     <Compile Include="DataAccess\All_FreezedTenders.cs" />
@@ -67,6 +66,7 @@
     <Compile Include="DataAccess\TenderHistory.cs" />
     <Compile Include="DataAccess\UnfreezedTenders.cs" />
     <Compile Include="DataAccess\Vendor%27sTendor.cs" />
+    <Compile Include="DataModel\Encrypted.cs" />
     <Compile Include="DataModel\tblUserProfile.cs" />
     <Compile Include="DataModel\tbl_OTPStatusCommiteeVerifiy.cs" />
     <Compile Include="DataAccess\Vendor.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="DataModel\tbl_Status.cs" />
     <Compile Include="DataModel\tbl_TenderDetails.cs" />
     <Compile Include="DataModel\tbl_VendorDetails.cs" />
+    <Compile Include="Extension\Extension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tempmodel\Temp_ UnfreezedTenders.cs" />
     <Compile Include="Tempmodel\Temp_AllActiveTendors.cs" />
@@ -101,7 +102,12 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\eTender.EncryptDecrypt\eTender.EncryptDecrypt.csproj">
+      <Project>{ab09bfbc-5c23-41cf-9a20-203a78ee0a82}</Project>
+      <Name>eTender.EncryptDecrypt</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

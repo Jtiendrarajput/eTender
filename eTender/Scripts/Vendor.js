@@ -2,41 +2,42 @@
 var loginformactive = true;
 var OpeModel = angular.module("OpeModel", []);
 
-OpeModel.controller("VendorController", function (DService,$scope,$location) {
+OpeModel.controller("VendorController", function (DService, $scope, $location) {
     $scope.VendorDetails = {};
     $scope.showsignup = false;
     $scope.showmobverify = false;
     $scope.showlogin = true;
     $scope.Verify = {};
+
+    $scope.LoginDetails = { UserName: "info@indiainteractive.net", PassWord: "Nalini@123" };
     var mobilenumber = "";
-   
+
     $scope.SIGNUP = function () {
 
         var chk1 = CheckPWD();
         var chk2 = CheckConfirmPWD();
-            if (chk1 == true && chk2 == true) {
-                DService.Signup($scope.VendorDetails).then(function (d) {
-                   // alert(d.data.msg);
-                    if (d.data.msg == 'success')
-                    {
-                        alert('You have registered successfully.. Please Verify your Mobile Number');
-                        mobilenumber = d.data.MobileNo;
-                        $scope.ShowMobVerify();
-                    }
-                    else {
-                        alert(d.data.msg);
-                    }
-                  
-                  
-                }, function (ex) {
-                    alert(JSON.stringify(ex));
-                });
+        if (chk1 == true && chk2 == true) {
+            DService.Signup($scope.VendorDetails).then(function (d) {
+                // alert(d.data.msg);
+                if (d.data.msg == 'success') {
+                    alert('You have registered successfully.. Please Verify your Mobile Number');
+                    mobilenumber = d.data.MobileNo;
+                    $scope.ShowMobVerify();
+                }
+                else {
+                    alert(d.data.msg);
+                }
 
-            }
-            else {
-                $scope.innerhtml = 'Password did not match';
 
-            }
+            }, function (ex) {
+                alert(JSON.stringify(ex));
+            });
+
+        }
+        else {
+            $scope.innerhtml = 'Password did not match';
+
+        }
     };
 
     //call function for password validation
@@ -89,8 +90,7 @@ OpeModel.controller("VendorController", function (DService,$scope,$location) {
     }
 
     $scope.ChangeBidder = function () {
-        if($scope.VendorDetails.BidderPreRegisteredWith == "MSME Registration")
-        {
+        if ($scope.VendorDetails.BidderPreRegisteredWith == "MSME Registration") {
             $scope.displaybidderinfo = true;
         }
         else {
@@ -108,14 +108,14 @@ OpeModel.controller("VendorController", function (DService,$scope,$location) {
         }
     }
 
- 
+
     $scope.ShowMobVerify = function () {
         $scope.Verify.MobileNumber = mobilenumber;
         $scope.showmobverify = true;
         $scope.showlogin = false;
     }
     $scope.ShowLogin = function () {
-        
+
         $scope.showmobverify = false;
         $scope.showlogin = true;
     }
@@ -132,39 +132,38 @@ OpeModel.controller("VendorController", function (DService,$scope,$location) {
 
     $scope.Login = function () {
         DService.Login($scope.LoginDetails).then(function (d) {
-           // alert(d.data.msg);
+            // alert(d.data.msg);
 
-            if (d.data.msg == "success")
-            {
+            if (d.data.msg == "success") {
                 var url = d.data.url;
-                DService.GetSignCommand().then(function (dd) {
-                    var response = dd.data.resp;
-                    $.post("http://127.0.0.1:1620", { "response": response }, function (d) {
+                //DService.GetSignCommand().then(function (dd) {
+                //    var response = dd.data.resp;
+                //    $.post("http://127.0.0.1:1620", { "response": response }, function (d) {
 
-                        var status = $(d).find("status").text();
-                        if (status == "failed") {
-                            var error = $(d).find("error").text();
-                            var error_code = $(d).find("error").attr('code');
-                            alert('Error code : ' + error_code + '<br/>Error Message : ' + error + '</div>');
-                        }
-                        else {
+                //        var status = $(d).find("status").text();
+                //        if (status == "failed") {
+                //            var error = $(d).find("error").text();
+                //            var error_code = $(d).find("error").attr('code');
+                //            alert('Error code : ' + error_code + '<br/>Error Message : ' + error + '</div>');
+                //        }
+                //        else {
 
-                            var data = $(d).find("data").text();
-                            var filetype = $(d).find("attribute").text();
-                            window.location.href = url;
-                            
-                           // alert('text is successfully signed.');
-                        }
+                //            var data = $(d).find("data").text();
+                //            var filetype = $(d).find("attribute").text();
+                window.location.href = url;
+
+                //           // alert('text is successfully signed.');
+                //        }
 
 
-                    }).fail(function (xhr, textStatus, errorThrown) {
-                        console.log(" Server response not received.");
-                        alert('Signing services  not running..');
-                    });
-                }, function (er) {
-                    JSON.stringify(er);
-                });
-               
+                //    }).fail(function (xhr, textStatus, errorThrown) {
+                //        console.log(" Server response not received.");
+                //        alert('Signing services  not running..');
+                //    });
+                //}, function (er) {
+                //    JSON.stringify(er);
+                //});
+
             }
 
             else if (d.data.msg == "Mobile Number is not Verified") {
@@ -175,16 +174,16 @@ OpeModel.controller("VendorController", function (DService,$scope,$location) {
             else {
                 alert(d.data.msg);
             }
-          
+
         }, function (ex) {
 
 
-            alert(JSON.stringify(ex));           
-           
+            alert(JSON.stringify(ex));
+
         });
     }
     $scope.togelclick = function () {
-        
+
         // Switches the Icon
         $('.toggle').children('i').toggleClass('fa-pencil');
         // Switches the forms  
@@ -195,8 +194,7 @@ OpeModel.controller("VendorController", function (DService,$scope,$location) {
             opacity: "toggle"
         }, "slow");
         loginformactive = loginformactive ? false : true;
-        if(!loginformactive)
-        {
+        if (!loginformactive) {
             DService.GetCertExtCommand().then(function (d) {
                 var response = d.data.resp;
                 $.post("http://127.0.0.1:1620", { "response": response }, function (d) {
@@ -211,7 +209,7 @@ OpeModel.controller("VendorController", function (DService,$scope,$location) {
                     else {
 
                         var data = $(d).find("data").text();
-                       
+
 
                         DService.GetCertDetails(data).then(function (crt) {
                             var rs = crt.data.CertDetails;
@@ -233,8 +231,7 @@ OpeModel.controller("VendorController", function (DService,$scope,$location) {
         }
     };
 
-    $scope.ResendOTP = function ()
-    {
+    $scope.ResendOTP = function () {
         if ($scope.Verify.MobileNumber == "" || $scope.Verify.MobileNumber == undefined) {
             alert('First Enter your Mobile Number then click resend OTP');
         }
@@ -266,14 +263,14 @@ OpeModel.factory("DService", function ($http) {
         return $http.post('/Home/Signup', vendor);
     };
 
-    fac.MobVerify = function (Mobile,OTP) {
+    fac.MobVerify = function (Mobile, OTP) {
         return $http.post('/Home/VerifyMobile?MobileNumber=' + Mobile + '&&OTP=' + OTP);
     };
 
     fac.Login = function (LoginDetails) {
         return $http.post('/Home/Login', LoginDetails);
     };
-    
+
 
     fac.SendOTP = function (mobile) {
         return $http.post('/Home/RegenerateOTP?mobile=' + mobile);

@@ -14,6 +14,7 @@ namespace eTenderService.DataAccess
     public class All_UnfreezedTenders
     {
        
+
         static string ConString = ConfigurationManager.ConnectionStrings["DB"].ConnectionString;
 
         public static List<Temp_AllTenders> AllUnfreezedTender()
